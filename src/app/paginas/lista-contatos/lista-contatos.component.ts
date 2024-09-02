@@ -34,7 +34,9 @@ export class ListaContatosComponent implements OnInit {
   constructor(private contatoService: ContatoService) {}
 
   ngOnInit() {
-    this.contatos = this.contatoService.obterContatos();
+    this.contatoService.obterContatos().subscribe(listaContatos => {
+      this.contatos = listaContatos;
+    });
   }
 
   filtrarContatosPorLetraInicial(letra: string): Contato[] {
