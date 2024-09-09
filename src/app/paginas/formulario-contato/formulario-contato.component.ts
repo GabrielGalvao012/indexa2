@@ -5,6 +5,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ContatoService } from '../../services/contato.service';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-formulario-contato',
@@ -33,7 +36,7 @@ export class FormularioContatoComponent implements OnInit {
 
   inicializarFormulario() {
     this.contatoForm = new FormGroup({
-      nome: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
+      nome: new FormControl('', Validators.required),
       telefone: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       aniversario: new FormControl(''),
@@ -43,21 +46,14 @@ export class FormularioContatoComponent implements OnInit {
   }
 
   salvarContato() {
-    //if (this.contatoForm.valid) {
-    //  console.log("Salvando...");
-    //  console.log(this.contatoForm.value);
-    //} else {
-    //  console.log("Erro de validação...");
-    //}
     const novoContato = this.contatoForm.value;
-    this.contatoService.salvarContato(novoContato);
-    this.contatoForm.reset();
-    this.router.navigateByUrl('/lista-contatos');
+    this.contatoService.salvarContato(novoContato).subscribe(() => {
+      this.contatoForm.reset();
+      this.router.navigateByUrl('/lista-contatos')
+    });
   }
 
   cancelar() {
-    //console.log("Submissão cancelada...");
-    this.contatoForm.reset();
+   this.contatoForm.reset();
   }
-
 }

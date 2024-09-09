@@ -7,7 +7,6 @@ import { RouterLink } from '@angular/router';
 import { ContatoService } from '../../services/contato.service';
 import { FormsModule } from '@angular/forms';
 import { Contato } from '../../componentes/contato/contato';
-
 // import agenda from '../../agenda.json'
 
 @Component({
@@ -19,7 +18,7 @@ import { Contato } from '../../componentes/contato/contato';
     CabecalhoComponent,
     FormsModule,
     ContatoComponent,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './lista-contatos.component.html',
   styleUrl: './lista-contatos.component.css'
