@@ -10,7 +10,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormularioContatoComponent,
+  imports: [
+    FormularioContatoComponent,
     ListaContatosComponent,
     RouterOutlet,
     MatToolbarModule, 

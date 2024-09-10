@@ -21,23 +21,27 @@
                 </li>
                 <li>{{contato.telefone}}</li>
                 <li>
+                    <i class="material-icons">email</i>
                     <strong>Email</strong>
                 </li>
                 <li>{{contato.email}}</li>
                 <li>
+                    <i class="material-icons">calendar_month</i>
                     <strong>Data de Nascimento</strong>
                 </li>
                 <li>{{contato.aniversario}}</li>
                 <li>
+                    <i class="material-icons">language</i>
                     <strong>Redes Sociais</strong>
                 </li>
                 <li>{{contato.redes}}</li>
             </ul>
             <div class="botoes">
-                <button class="botao-excluir">
+                <button (click)="excluir()" class="botao-excluir">
                     Excluir contato
                 </button>
-                <button class="botao-editar">
+                <button 
+                    class="botao-editar">
                     Editar
                 </button>
             </div>
