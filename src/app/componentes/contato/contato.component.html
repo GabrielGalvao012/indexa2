@@ -7,7 +7,7 @@
             <strong>{{ telefone }}</strong>
         </li>
         <li>
-            <button>
+            <button [routerLink]="['/formulario', id]">
                 <img src="/assets/pencil-square.png" alt="alteração" />
             </button>
             <button [routerLink]="['/perfil-contato', id]">

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { ContainerComponent } from "../../componentes/container/container.component";
 import { Contato } from '../../componentes/contato/contato';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { SeparadorComponent } from "../../componentes/separador/separador.component";
+import { ContatoService } from '../../services/contato.service';
 
 @Component({
   selector: 'app-perfil-contato',
@@ -10,8 +11,8 @@ import { SeparadorComponent } from "../../componentes/separador/separador.compon
   imports: [
     ContainerComponent,
     RouterLink,
-    SeparadorComponent
-],
+    SeparadorComponent,
+  ],
   templateUrl: './perfil-contato.component.html',
   styleUrl: './perfil-contato.component.css'
 })
@@ -26,7 +27,25 @@ export class PerfilContatoComponent {
     redes: '@galvao_gvb'
   }
 
-  excluir(){
+  constructor(
+    private activateRoute: ActivatedRoute,
+    private contatoService: ContatoService,
+    private router: Router) {}
 
+  ngOnInit(): void {
+    const id = this.activateRoute.snapshot.paramMap.get('id');
+    if (id) {
+      this.contatoService.buscarPorId(parseInt(id)).subscribe((contato) => {
+        this.contato = contato;
+      })
+    }
+  }
+
+  excluir() {
+    if (this.contato.id) {
+      this.contatoService.excluirContato(this.contato.id).subscribe(() => {
+        this.router.navigateByUrl('/lista-contatos')
+      })
+    }
   }
 }

@@ -3,11 +3,8 @@ import { ContainerComponent } from "../../componentes/container/container.compon
 import { SeparadorComponent } from "../../componentes/separador/separador.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { ContatoService } from '../../services/contato.service';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-formulario-contato',
@@ -17,7 +14,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     SeparadorComponent,
     ReactiveFormsModule,
     NgClass,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './formulario-contato.component.html',
   styleUrl: './formulario-contato.component.css'
@@ -28,10 +25,12 @@ export class FormularioContatoComponent implements OnInit {
 
   constructor(
     private contatoService: ContatoService,
-    private router: Router) {}
+    private router: Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.inicializarFormulario();
+    this.inicializarFormulario(),
+    this.carregarContato();
   }
 
   inicializarFormulario() {
@@ -45,12 +44,23 @@ export class FormularioContatoComponent implements OnInit {
     })
   }
 
+  carregarContato() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (id) {
+      this.contatoService.buscarPorId(parseInt(id)).subscribe((contato) => {
+        this.contatoForm.patchValue(contato)
+      });
+    }
+  }
+
   salvarContato() {
     const novoContato = this.contatoForm.value;
-    this.contatoService.salvarContato(novoContato).subscribe(() => {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    novoContato.id = id ? parseInt(id) : null;
+    this.contatoService.editarOuSalvarContato(novoContato).subscribe(() => {
       this.contatoForm.reset();
       this.router.navigateByUrl('/lista-contatos')
-    });
+      });
   }
 
   cancelar() {
