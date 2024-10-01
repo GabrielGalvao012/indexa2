@@ -20,11 +20,12 @@ export class PerfilContatoComponent {
 
   contato: Contato = {
     id: 0,
-    nome: 'dev',
-    telefone: '18-997606399',
-    email: 'dev@gmail.com',
-    aniversario: '12/03/2003',
-    redes: '@galvao_gvb'
+    nome: '',
+    avatar: '',
+    telefone: '',
+    email: '',
+    aniversario: '',
+    redes: ''
   }
 
   constructor(

@@ -170,3 +170,56 @@ header .cabecalho-link {
     cursor: pointer;
     background: none;
   }
+
+  header .cabecalho-link button {
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    background: none;
+  }
+
+  .imagem-contato{
+    width: 104px;
+    height: 104px;
+    border: 1px dotted #ADB5BD;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+  }
+
+  .imagem-contato i {
+    margin-top: 8px;
+  }
+
+  .imagem-contato label {
+    font-family: 'Montserrat';
+    font-size: 15px;
+  }
+
+  .imagem-perfil {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding-top: 12px;
+    padding-left: 24px;
+    margin-top: 36px;
+  }
+
+  .imagem-perfil img {
+    width: 100px;
+    height:  100px;
+    object-fit: cover;
+  }
+
+  h2 {
+    font-family: "Montserrat";
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 33px;
+    color: #0D6EFD;
+    padding-left: 12px;
+  }

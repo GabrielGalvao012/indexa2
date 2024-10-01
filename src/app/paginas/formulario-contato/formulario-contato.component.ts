@@ -3,7 +3,7 @@ import { ContainerComponent } from "../../componentes/container/container.compon
 import { SeparadorComponent } from "../../componentes/separador/separador.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink} from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ContatoService } from '../../services/contato.service';
 
 @Component({
@@ -35,7 +35,8 @@ export class FormularioContatoComponent implements OnInit {
 
   inicializarFormulario() {
     this.contatoForm = new FormGroup({
-      nome: new FormControl('', Validators.required),
+      nome: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]),
+      avatar: new FormControl('', Validators.required),
       telefone: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       aniversario: new FormControl(''),
@@ -66,4 +67,22 @@ export class FormularioContatoComponent implements OnInit {
   cancelar() {
    this.contatoForm.reset();
   }
+
+  aoSelecionarArquivo(event: any) {
+    const file: File = event.target.files[0]
+      if (file) {
+        this.lerArquivo(file)
+      } 
+  }
+
+  lerArquivo(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.result) {
+        this.contatoForm.get('avatar')?.setValue(reader.result)
+      }
+    }
+    reader.readAsDataURL(file)
+  }
+
 }
